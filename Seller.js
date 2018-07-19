@@ -8,7 +8,7 @@ import {showImagePicker} from 'react-native-image-picker'
 export default class HomeScreen extends React.Component {
     constructor(){
         super();
-        global.locationS=this.state.location;
+        GLOBAL.locationS=this.state.location;
     }
     state={
         imageSource:null,heading:null,subHeading:null,location:null,users:null,myKey:null,amount:null,checked:false,
@@ -128,7 +128,7 @@ export default class HomeScreen extends React.Component {
           this.setState({below1: below1});
           this.setState({average1: average1});
           this.setState({high1: high1});
-          Alert.alert( `${this.state.checked} ${this.state.below1} ${this.state.average1} ${this.state.high1} ${this.state.checked1} ${this.state.checked2} ${this.state.checked3} ${this.state.heading}  ${this.state.subHeading}  ${this.state.location} ${this.state.users} ${this.state.amount} `) 
+       Alert.alert( `${this.state.checked} ${this.state.below1} ${this.state.average1} ${this.state.high1} ${this.state.checked1} ${this.state.checked2} ${this.state.checked3} ${this.state.heading}  ${this.state.subHeading}  ${this.state.location} ${this.state.users} ${this.state.amount} `) 
         } catch (error) {
           console.log("Error retrieving data" + error);
         }
@@ -182,8 +182,9 @@ export default class HomeScreen extends React.Component {
     }
     render() {
     return (
-    <View style={{ flex: 1,justifyContent: 'center',alignItems: 'flex-start',marginLeft:10}}>
-        <View style={{ flex: 0.1,justifyContent: 'space-between',flexDirection: 'row'}}>  
+    <View style={styles.container}>
+    <Text style={{fontSize:25,color:'#9C27B0',fontFamily: 'Cochin',fontWeight: 'bold',alignItems:'center',justifyContent:'center'}}>                      Seller</Text>
+        <View style={{ flex: 0.1,justifyContent: 'space-between',flexDirection: 'row',marginLeft:10}}>  
             <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
             <View style={styles.ImageContainer}>
                 {this.state.imageSource===null ? <Text  style={{fontSize:20,marginLeft:10}}>Select image</Text>:<Image onPress={this.saveKey5(this.state.imageSource)} source={this.state.imageSource} />}
@@ -192,7 +193,7 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
         </View>
         <View style={{ flex: 0.1,flexDirection: 'row'}}>
-            <Text style={{fontSize:20}}>Size      </Text> 
+            <Text style={{fontSize:20}}>ImageSize      </Text> 
             <TouchableOpacity onPress={this.check_Box()} style={{ flex: 0.1,flexDirection: 'row'}}>
             <CheckBox label='S'   checked={this.state.checked}
           onChange={() => this.setState({ checked: !this.state.checked })} />
@@ -204,14 +205,14 @@ export default class HomeScreen extends React.Component {
           onChange={() => this.setState({ checked3: !this.state.checked3 })} />
             </TouchableOpacity>
         </View>
-        <View style={{flex: 0.1,flexDirection: 'row'}}>
+        <View style={{flex: 0.1,flexDirection: 'row',marginLeft:40,marginRight:10}}>
             <TextInput style = {styles.input} onChangeText={(heading) => this.saveKey2(heading)}
                underlineColorAndroid = "transparent"
                placeholder = "Heading"
                 width="80%"
                autoCapitalize = "none"/>
         </View>
-        <View style={{flex: 0.1,flexDirection: 'row'}}>
+        <View style={{flex: 0.1,flexDirection: 'row',marginLeft:40,marginRight:10}}>
             <TextInput style = {styles.input} onChangeText={(subHeading) => this.saveKey3(subHeading)}
                underlineColorAndroid = "transparent"
                placeholder = "Sub Heading"
@@ -223,7 +224,7 @@ export default class HomeScreen extends React.Component {
             <TextInput style = {styles.input} onChangeText={(amount) => this.saveKey(amount)}
                underlineColorAndroid = "transparent"
                placeholder = "Amount"
-               width="20%" height="40%"
+               width="50%" height="50%"
                autoCapitalize = "none"/>
         </View>
         <View style={{ flex: 0.1,flexDirection: 'row'}}>
@@ -233,12 +234,12 @@ export default class HomeScreen extends React.Component {
             <TextInput style = {styles.input} onChangeText={(location) => this.saveKey1(location)}
                underlineColorAndroid = "transparent"
                placeholder = "Location"
-                width="20%" height="40%"
+               width="50%" height="50%"
                autoCapitalize = "none"/>
         </View>
         <View style={{flex: 0.1, flexDirection: 'row'}}>
-            <Text style={{fontSize:20}}>Users Age   </Text> 
-            <TouchableOpacity onPress={this.user_age()} style={{ flex: 0.1,flexDirection: 'row'}}>
+            <Text style={{fontSize:20}}>User Age  </Text> 
+            <TouchableOpacity onPress={this.user_age()} style={{flexDirection: 'row'}}>
             <CheckBox label='18-30' below1={this.state.below1}
           onChange={() => this.setState({ below1: !this.state.below1 })} />
              <CheckBox label='30-45' average1={this.state.average1}
@@ -255,27 +256,35 @@ export default class HomeScreen extends React.Component {
                  width="50%" height="50%"
                autoCapitalize = "none"/>
         </View>
-        <Button style={{alignItems: 'center',flexDirection:'column'}}
+        <View style={{flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'flex-end', backgroundColor: 'grey',marginLeft:10,marginRight:20}}>
+        <Button 
             color={ 'blue' } 
             disabled={ this.state.buttonDisabled } 
            // onPress={this.onSubmit.bind(this)}
             onPress={this.getKey.bind(this)}
             title={ 'Submit' }  
             /> 
-             <Button style={{alignItems: 'center',flexDirection:'column'}}
+             <Button style={{alignItems: 'flex-end'}}
             color={ 'blue' } 
             disabled={ this.state.buttonDisabled } 
            // onPress={this.onSubmit.bind(this)}
             onPress={this.remove.bind(this)}
             title={ 'Remove' }  
             /> 
+            </View>
     </View>
     );
   }
 }
 const styles = StyleSheet.create({
     container: {
-       paddingTop: 23
+       paddingTop: 23,
+       flex:1,
+       justifyContent:'space-around',
+       marginLeft:10,
+       marginRight:10
     },
     input: {
         textAlign: 'center',
@@ -283,6 +292,7 @@ const styles = StyleSheet.create({
         marginBottom: 7,
          
         height: 40,
+        width:100,
          
         borderWidth: 1,
         // Set border Hex Color Code Here.

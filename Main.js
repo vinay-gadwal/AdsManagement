@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import SettingsScreen from './Bidder'
 import HomeScreen from './Seller'
 import MyChat from './chat'
+import Project from './search'
 
 class App extends Component {
     render() {
@@ -18,7 +19,7 @@ class App extends Component {
   }
 export default createBottomTabNavigator({
   Seller: HomeScreen,
-  Bidder: SettingsScreen,
+  Bidder: Project,
   chat:MyChat
 },
   {
