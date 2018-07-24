@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import { TouchableOpacity, AsyncStorage,StyleSheet, View,Im, Text ,TextInput,Alert,Button} from 'react-native'
+import { TouchableOpacity, AsyncStorage,StyleSheet, View,Image, Text ,TextInput,Alert,Button} from 'react-native'
 import HomeScreen from './Seller'
 export default class SettingsScreen extends Component{
   constructor(){
@@ -10,42 +10,26 @@ export default class SettingsScreen extends Component{
     }
   }
   
-  getValueLocally(){
-    AsyncStorage.getItem('location').then((value) => this.setState({ location : value }))
-    AsyncStorage.getItem('users').then((value) => this.setState({ users : value }))
-
-    if(this.state.text===this.state.location || this.state.text===this.state.users)
-    {
-      AsyncStorage.getItem('amount').then((value) => this.setState({ amount : value }))
-      AsyncStorage.getItem('heading').then((value) => this.setState({ heading : value }))
-      AsyncStorage.getItem('subHeading').then((value) => this.setState({ subHeading : value }))
-      AsyncStorage.getItem('checked').then((value) => this.setState({ checked : value }))
-      AsyncStorage.getItem('checked1').then((value) => this.setState({ checked1 : value }))
-      AsyncStorage.getItem('checked2').then((value) => this.setState({ checked2 : value }))
-      AsyncStorage.getItem('checked3').then((value) => this.setState({ checked3 : value }))
-      AsyncStorage.getItem('below1').then((value) => this.setState({ below1 : value }))
-      AsyncStorage.getItem('average1').then((value) => this.setState({ average1 : value }))
-      AsyncStorage.getItem('high1').then((value) => this.setState({ high1 : value }))
-      AsyncStorage.getItem('users').then((value) => this.setState({ users : value }))
-      AsyncStorage.getItem('imageSource').then((value) => this.setState({ imageSource : value }))
-    }else{
-      AsyncStorage.getItem('amount').then((value) => this.setState({ amount : value }))
-      AsyncStorage.getItem('heading').then((value) => this.setState({ heading : value }))
-      AsyncStorage.getItem('subHeading').then((value) => this.setState({ subHeading : value }))
-      AsyncStorage.getItem('checked').then((value) => this.setState({ checked : value }))
-      AsyncStorage.getItem('checked1').then((value) => this.setState({ checked1 : value }))
-      AsyncStorage.getItem('checked2').then((value) => this.setState({ checked2 : value }))
-      AsyncStorage.getItem('checked3').then((value) => this.setState({ checked3 : value }))
-      AsyncStorage.getItem('below1').then((value) => this.setState({ below1 : value }))
-      AsyncStorage.getItem('average1').then((value) => this.setState({ average1 : value }))
-      AsyncStorage.getItem('high1').then((value) => this.setState({ high1 : value }))
-      AsyncStorage.getItem('users').then((value) => this.setState({ users : value }))
-      AsyncStorage.getItem('imageSource').then((value) => this.setState({ imageSource : value }))
-    }
-  }
+  // async getValueLocally(){
+  // await AsyncStorage.getItem('location').then((value) => this.setState({ location : value }))
+  // await AsyncStorage.getItem('users').then((value) => this.setState({ users : value }))
+  // await AsyncStorage.getItem('amount').then((value) => this.setState({ amount : value }))
+  // await AsyncStorage.getItem('heading').then((value) => this.setState({ heading : value }))
+  // await AsyncStorage.getItem('subHeading').then((value) => this.setState({ subHeading : value }))
+  // await AsyncStorage.getItem('checked').then((value) => this.setState({ checked : value }))
+  // await AsyncStorage.getItem('checked1').then((value) => this.setState({ checked1 : value }))
+  // await AsyncStorage.getItem('checked2').then((value) => this.setState({ checked2 : value }))
+  // await AsyncStorage.getItem('checked3').then((value) => this.setState({ checked3 : value }))
+  // await AsyncStorage.getItem('below1').then((value) => this.setState({ below1 : value }))
+  // await AsyncStorage.getItem('average1').then((value) => this.setState({ average1 : value }))
+  // await AsyncStorage.getItem('high1').then((value) => this.setState({ high1 : value }))
+  // await AsyncStorage.getItem('users').then((value) => this.setState({ users : value }))
+  // await AsyncStorage.getItem('imageSource').then((value) => this.setState({ imageSource : value }))
+    
+  // }
   
   size_Image(){
-    if(this.state.text!=null){
+    
     if(this.state.checked==null){
       if(this.state.checked1==null){
         if(this.state.checked2==null){
@@ -65,64 +49,83 @@ export default class SettingsScreen extends Component{
       return <Text>{this.state.checked}</Text>
     }
   }
+
+  sizeImage(){
+    if(GLOBAL.checked==null){
+      if(GLOBAL.checked1==null){
+        if(GLOBAL.checked2==null){
+          if(GLOBAL.checked3!=null){
+            return <Text>{GLOBAL.checked3}</Text>
+          }else{
+            return <Text>No Size selected</Text>
+          }
+        }else{
+          return <Text>{GLOBAL.checked2}</Text>
+        }
+      }else{
+        return <Text>{GLOBAL.checked1}</Text>
+      }
+    }else{
+      return <Text>{GLOBAL.checked}</Text>
+    }
+    
   }
+  
   user_Age(){
-    if(this.state.text!=null){
-    if(this.state.below1==null){
-      if(this.state.average1==null){
-        if(this.state.high1!=null){
-          return <Text>{this.state.high1}</Text>
+    
+    if(GLOBAL.below1==null){
+      if(GLOBAL.average1==null){
+        if(GLOBAL.high1!=null){
+          return <Text>{GLOBAL.high1}</Text>
         }else{
           return <Text>Choose user age</Text>
         }
       }else{
-       return <Text>{this.state.average1}</Text>
+       return <Text>{GLOBAL.average1}</Text>
       }
     }else{
-      return <Text>{this.state.below1}</Text>
+      return <Text>{GLOBAL.below1}</Text>
     }
   }
-  }
+  
 
   
   render(){
    return (
      <View style = {styles.container}>
-          <Text style={{flex:0.3,color:'#9C27B0',fontSize:25,fontFamily: 'Cochin',fontWeight: 'bold'}}>Bidder</Text>
+          <Text style={{color:'#9C27B0',fontSize:25,fontFamily: 'Cochin',fontWeight: 'bold',marginTop:10}}>Bidder</Text>
 
-    <View style={{flex:0.2}}>
-    <TextInput style = {styles.input}
-      placeholder="Search by location OR Users"
-      onChangeText={(text) => this.setState({text})}
-    />
+    <View>
+    
   </View >
       <View style={{ flex:0.2}}>
-      <Button 
+      <TouchableOpacity >
+        <TextInput
             color={ 'blue' } 
-          // onPress={this.onSubmit.bind(this)}
-           onPress={this.getValueLocally()}
-            title={ 'Search' }  
-            /> 
+          //  onChangeText={this.getValueLocally()}
+            //title={ 'Search' }  
+            />
+            </TouchableOpacity>
       </View>
       <View style={{alignItems:'flex-start', justifyContent:'flex-start',flexDirection: 'row'}}>
       <Text style={{fontSize:20}}>Size                    </Text>
-      <TextInput style = {styles.input}>{this.size_Image()}</TextInput>
+      <TextInput style = {styles.input}>{this.sizeImage()}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
       <Text style={{alignItems: 'flex-end',fontSize:20}}>Heading           </Text>
-      <TextInput style = {styles.input}>{this.state.heading}</TextInput>
+      <TextInput style = {styles.input}>{GLOBAL.heading}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
       <Text style={{fontSize:20}}>SubHeading    </Text>
-      <TextInput style = {styles.input}>{this.state.subHeading}</TextInput>
+      <TextInput style = {styles.input}>{GLOBAL.subHeading}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
       <Text style={{fontSize:20}}>Amount             </Text>
-      <TextInput style = {styles.input}>{this.state.amount}</TextInput>
+      <TextInput style = {styles.input}>{GLOBAL.amount}</TextInput>
       </View>
       <View style={{flexDirection: 'row'}}>
       <Text style={{fontSize:20}}>Location           </Text>
-      <TextInput style = {styles.input}>{this.state.location}</TextInput>
+      <TextInput style = {styles.input}>{GLOBAL.locationS}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
       <Text style={{fontSize:20}}>Age                    </Text>
@@ -130,9 +133,9 @@ export default class SettingsScreen extends Component{
       </View>
       <View style={{flexDirection: 'row'}}>
       <Text style={{fontSize:20}}>Volume             </Text>
-      <TextInput style = {styles.input}>{this.state.users}</TextInput>
+      <TextInput style = {styles.input}>{GLOBAL.users}</TextInput>
       </View>
-      {/* <Image source = {require('imageSource')} /> */}
+      <Image onPress={this.sizeImage()}/>
       </View>
    )
 }
@@ -149,7 +152,7 @@ const styles = StyleSheet.create ({
      
     borderWidth: 1,
     // Set border Hex Color Code Here.
-     borderColor: '#D50000',
+     borderColor: '#851D07',
      
      // Set border Radius.
      borderRadius: 6 ,

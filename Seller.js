@@ -1,18 +1,17 @@
 
-import React from 'react';
+import React,{Component} from 'react';
 import { Text, View ,Button,TouchableOpacity,TextInput,StyleSheet,Image,Alert,AsyncStorage} from 'react-native';
 import CheckBox from 'react-native-checkbox';
-import RNGooglePlacePicker from 'react-native-google-place-picker';
+
 import {showImagePicker} from 'react-native-image-picker'
 
 export default class HomeScreen extends React.Component {
     constructor(){
         super();
-        GLOBAL.locationS=this.state.location;
     }
     state={
         imageSource:null,heading:null,subHeading:null,location:null,users:null,myKey:null,amount:null,checked:false,
-        checked1:false,checked2:false,checked3:false,S:'S',M:'M',L:'L',XL:'XL',below:'18-30',below1:false,average1:false,average:'30-45',high:'45+',high1:false
+        checked1:false,checked2:false,checked3:false,below1:false,average1:false,high1:false
     };
     remove(){
 
@@ -24,30 +23,59 @@ export default class HomeScreen extends React.Component {
     user_age(){
         
             if(this.state.below1===true){
-                AsyncStorage.setItem('below1',this.state.below)
+                AsyncStorage.setItem('below1',"18-30")
             }
             else if(this.state.average1==true){
-                AsyncStorage.setItem('average1',this.state.average)
+                AsyncStorage.setItem('average1',"30-45")
             }
             else if(this.state.high1==true){
-                AsyncStorage.setItem('high1',this.state.high)
+                AsyncStorage.setItem('high1',"45+")
             }
         
     }
-    check_Box(){
-        if(this.state.checked===true){
-            AsyncStorage.setItem('checked',this.state.S)
+   async check_Box(){
+        if(this.state.checked==true){
+           await AsyncStorage.setItem('checked',"S")
+          //  this.setState({checked1: false ,checked2: false,checked3: false});
         }
         else if(this.state.checked1==true){
-            AsyncStorage.setItem('checked1',this.state.M)
+           await AsyncStorage.setItem('checked1',"M")
+           // this.setState({checked: false ,checked2: false,checked3: false});
         }
         else if(this.state.checked2==true){
-            AsyncStorage.setItem('checked2',this.state.L)
+           await AsyncStorage.setItem('checked2',"L")
+           // this.setState({checked1: false ,checked: false,checked3: false});
         }
         else if(this.state.checked3==true){
-            AsyncStorage.setItem('checked3',this.state.XL)
+           await AsyncStorage.setItem('checked3',"XL")
+           // this.setState({checked1: false ,checked2: false,checked3: false});
         }
     }
+    sizeImage(){
+    
+        if(this.state.checked==false){
+          if(this.state.checked1==false){
+            if(this.state.checked2==false){
+              if(this.state.checked3!=false){
+                  return     //<Image style={{width: 400, height: 400}} source={{uri:this.state.imageSource}}></Image>
+                  <ImageBackground source={this.state.imageSource} style={{width: '100%', height: '100%'}}>
+                  <Text>Inside</Text>
+                </ImageBackground>
+              }
+            }else{
+              return       <Image style={{width: 300, height: 300}} source={{uri:this.state.imageSource}}></Image>
+    
+            }
+          }else{
+            return       <Image style={{width: 200, height: 200}} source={{uri:this.state.imageSource}}></Image>
+    
+          }
+        }
+        else{
+          return       <Image style={{width: 100, height: 100}} source={{uri:this.state.imageSource}}></Image>
+    
+        }
+      }
     async saveKey(amount) {
         // try{
         //     AsyncStorage.multiSet([['heading',heading], ['subHeading',subHeading], ['location',location], ['users',users],['amount',amount]],(error)=>{
@@ -128,9 +156,26 @@ export default class HomeScreen extends React.Component {
           this.setState({below1: below1});
           this.setState({average1: average1});
           this.setState({high1: high1});
-       Alert.alert( `${this.state.checked} ${this.state.below1} ${this.state.average1} ${this.state.high1} ${this.state.checked1} ${this.state.checked2} ${this.state.checked3} ${this.state.heading}  ${this.state.subHeading}  ${this.state.location} ${this.state.users} ${this.state.amount} `) 
+     //  Alert.alert( `${this.state.checked} ${this.state.below1} ${this.state.average1} ${this.state.high1} ${this.state.checked1} ${this.state.checked2} ${this.state.checked3} ${this.state.heading}  ${this.state.subHeading}  ${this.state.location} ${this.state.users} ${this.state.amount} `) 
+       GLOBAL.locationS=this.state.location;
+       GLOBAL.heading=this.state.heading;
+       GLOBAL.subHeading=this.state.subHeading;
+       GLOBAL.users=this.state.users;
+       GLOBAL.amount=this.state.amount;
+       GLOBAL.checked=this.state.checked;
+       GLOBAL.checked1=this.state.checked1;
+       GLOBAL.checked2=this.state.checked2;
+       GLOBAL.checked3=this.state.checked3;
+       GLOBAL.below1=this.state.below1;
+       GLOBAL.average1=this.state.average1;
+       GLOBAL.high1=this.state.high1;
         } catch (error) {
           console.log("Error retrieving data" + error);
+        }
+        if(GLOBAL.locationS==null){
+          Alert.alert("please enter data")
+        }else{
+          Alert.alert("Data Entered Successfully")
         }
       }
     onSubmit(){
@@ -165,6 +210,70 @@ export default class HomeScreen extends React.Component {
             }
         })
     }
+    size_Image(){
+    
+        if(this.state.checked==null){
+          if(this.state.checked1==null){
+            if(this.state.checked2==null){
+              if(this.state.checked3!=null){
+                  return <Text>{this.state.checked3}</Text>
+              }else{
+                return <Text>No Size Fixed</Text>
+              }
+            }else{
+              return <Text>{this.state.checked2}</Text>
+            }
+          }else{
+            return <Text>{this.state.checked1}</Text>
+          }
+        }
+        else{
+          return <Text>{this.state.checked}</Text>
+        }
+      }
+      sizeImage(){
+        
+        if(this.state.checked==null){
+          if(this.state.checked1==null){
+            if(this.state.checked2==null){
+              if(this.state.checked3!=null){
+                  return       <Image style={{width: 400, height: 400}} source={{uri:this.state.imageSource}}></Image>
+    
+              }else{
+                return       <Image style={{width: 400, height: 400}} source={{uri:this.state.imageSource}}></Image>
+    
+              }
+            }else{
+              return       <Image  style={{width: 400, height: 400}} source={{uri:this.state.imageSource}}></Image>
+    
+            }
+          }else{
+            return       <Image style={{width: 400, height: 400}} source={{uri:this.state.imageSource}}></Image>
+    
+          }
+        }
+        else{
+          return       <Image style={{width: 400, height: 400}} source={{uri:this.state.imageSource}}></Image>
+    
+        }
+      }
+      
+      user_Age(){
+        // if(this.state.text!=null){
+        if(this.state.below1==null){
+          if(this.state.average1==null){
+            if(this.state.high1!=null){
+              return <Text>{this.state.high1}</Text>
+            }else{
+              return <Text>Choose user age</Text>
+            }
+          }else{
+           return <Text>{this.state.average1}</Text>
+          }
+        }else{
+          return <Text>{this.state.below1}</Text>
+        }
+      }
     addressPicker(){
     //RNGooglePlacePicker.show((response) => {
     //     if (response.didCancel) {
@@ -184,15 +293,18 @@ export default class HomeScreen extends React.Component {
     return (
     <View style={styles.container}>
     <Text style={{fontSize:25,color:'#9C27B0',fontFamily: 'Cochin',fontWeight: 'bold',alignItems:'center',justifyContent:'center'}}>                      Seller</Text>
+    <View>
+        <Image onPress={this.sizeImage()}/>
+            </View>
         <View style={{ flex: 0.1,justifyContent: 'space-between',flexDirection: 'row',marginLeft:10}}>  
             <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
             <View style={styles.ImageContainer}>
-                {this.state.imageSource===null ? <Text  style={{fontSize:20,marginLeft:10}}>Select image</Text>:<Image onPress={this.saveKey5(this.state.imageSource)} source={this.state.imageSource} />}
+                {this.state.imageSource===null ? <Text style={{fontSize:20}}>Select                       </Text>:<Image onPress={this.saveKey5(this.state.imageSource)} source={this.state.imageSource} />}
             </View>
 
             </TouchableOpacity>
         </View>
-        <View style={{ flex: 0.1,flexDirection: 'row'}}>
+        <View style={{ flex: 0,flexDirection: 'row'}}>
             <Text style={{fontSize:20}}>ImageSize      </Text> 
             <TouchableOpacity onPress={this.check_Box()} style={{ flex: 0.1,flexDirection: 'row'}}>
             <CheckBox label='S'   checked={this.state.checked}
@@ -205,31 +317,37 @@ export default class HomeScreen extends React.Component {
           onChange={() => this.setState({ checked3: !this.state.checked3 })} />
             </TouchableOpacity>
         </View>
-        <View style={{flex: 0.1,flexDirection: 'row',marginLeft:40,marginRight:10}}>
+        <View style={{flex: 0,alignItems:'flex-start', justifyContent:'flex-start',flexDirection: 'row'}}>
+      <Text style={{fontSize:20}}>Size                         </Text>
+      <Text width="70%" height="50%" style = {styles.input}>{this.size_Image()}</Text>
+      </View>
+        <View style={{ flex: 0.2,flexDirection: 'row'}}>
+        <Text style={{fontSize:20}} >Heading                 </Text>
             <TextInput style = {styles.input} onChangeText={(heading) => this.saveKey2(heading)}
                underlineColorAndroid = "transparent"
                placeholder = "Heading"
-                width="80%"
+                width="50%"
                autoCapitalize = "none"/>
         </View>
-        <View style={{flex: 0.1,flexDirection: 'row',marginLeft:40,marginRight:10}}>
+        <View style={{ flex: 0.2,flexDirection: 'row'}}>
+        <Text style={{fontSize:20}} >SubHeading         </Text>
             <TextInput style = {styles.input} onChangeText={(subHeading) => this.saveKey3(subHeading)}
                underlineColorAndroid = "transparent"
                placeholder = "Sub Heading"
-                width="80%"
+                width="50%"
                autoCapitalize = "none"/>
         </View>
-        <View style={{ flex: 0.1,flexDirection: 'row'}}>
-            <Text style={{fontSize:20}}>Amount           </Text>
+        <View style={{ flex: 0.2,flexDirection: 'row'}}>
+            <Text style={{fontSize:20}}>Amount                  </Text>
             <TextInput style = {styles.input} onChangeText={(amount) => this.saveKey(amount)}
                underlineColorAndroid = "transparent"
                placeholder = "Amount"
                width="50%" height="50%"
                autoCapitalize = "none"/>
         </View>
-        <View style={{ flex: 0.1,flexDirection: 'row'}}>
+        <View style={{ flex: 0.2,flexDirection: 'row'}}>
         <TouchableOpacity onPress={this.addressPicker()}>
-            <Text style={{fontSize:20}} >Location         </Text>
+            <Text style={{fontSize:20}} >Location                 </Text>
             </TouchableOpacity>
             <TextInput style = {styles.input} onChangeText={(location) => this.saveKey1(location)}
                underlineColorAndroid = "transparent"
@@ -237,7 +355,7 @@ export default class HomeScreen extends React.Component {
                width="50%" height="50%"
                autoCapitalize = "none"/>
         </View>
-        <View style={{flex: 0.1, flexDirection: 'row'}}>
+        <View style={{flex: 0, flexDirection: 'row'}}>
             <Text style={{fontSize:20}}>User Age  </Text> 
             <TouchableOpacity onPress={this.user_age()} style={{flexDirection: 'row'}}>
             <CheckBox label='18-30' below1={this.state.below1}
@@ -248,8 +366,12 @@ export default class HomeScreen extends React.Component {
           onChange={() => this.setState({ high1: !this.state.high })} />
             </TouchableOpacity>
         </View>
-        <View style={{ flex: 0.1,flexDirection: 'row'}}>
-            <Text style={{fontSize:20}}>Volume           </Text>
+        <View style={{ flexDirection: 'row'}}>
+      <Text style={{fontSize:20}}>Age                          </Text>
+      <Text placeholder = "Select users age" width="50%" height="50%" style = {styles.input}>{this.user_Age()}</Text>
+      </View>
+        <View style={{ flex: 0.2,flexDirection: 'row'}}>
+            <Text style={{fontSize:20}}>Volume                   </Text>
             <TextInput style = {styles.input} onChangeText={(users) => this.saveKey4(users)}
                underlineColorAndroid = "transparent"
                placeholder = "Numbers of users"

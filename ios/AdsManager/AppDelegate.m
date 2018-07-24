@@ -4,8 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-#import <GoogleMaps/GoogleMaps.h>
-#import <GooglePlaces/GooglePlaces.h>
+
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
@@ -31,9 +30,6 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
-  NSString *kAPIKey = @"YOUR_API_KEY";
-[GMSPlacesClient provideAPIKey:kAPIKey];
-[GMSServices provideAPIKey:kAPIKey];
 }
 
 @end

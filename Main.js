@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
-import { Text, View } from 'react-native';
+import { Text, View ,YellowBox} from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
 import SettingsScreen from './Bidder'
 import HomeScreen from './Seller'
 import MyChat from './chat'
 import Project from './search'
-
+console.disableYellowBox = true;
 class App extends Component {
     render() {
       return (
