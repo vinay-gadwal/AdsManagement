@@ -1,7 +1,9 @@
 import React,{Component} from 'react'
 import { TouchableOpacity, AsyncStorage,StyleSheet, View,Image, Text ,TextInput,Alert,Button} from 'react-native'
 import HomeScreen from './Seller'
-export default class SettingsScreen extends Component{
+import { StackNavigator } from 'react-navigation';
+import images from './Image'
+ class SettingsScreen1 extends Component{
   constructor(){
     super();
     this.state={
@@ -9,6 +11,11 @@ export default class SettingsScreen extends Component{
       checked1:"",checked2:"",checked3:"",below1:"",average1:"",high1:"",getValue:''
     }
   }
+  FunctionToOpenSecondActivity = () =>
+ {
+    this.props.navigation.navigate('Second');
+    
+ }
   
   // async getValueLocally(){
   // await AsyncStorage.getItem('location').then((value) => this.setState({ location : value }))
@@ -135,11 +142,20 @@ export default class SettingsScreen extends Component{
       <Text style={{fontSize:20}}>Volume             </Text>
       <TextInput style = {styles.input}>{GLOBAL.users}</TextInput>
       </View>
-      <Image onPress={this.sizeImage()}/>
+      <View style={{fontSize:20}}>
+            
+              <Button onPress={this.FunctionToOpenSecondActivity} title="click here to see image"/>
+              </View>
       </View>
    )
 }
 }
+export default SettingsScreen = StackNavigator(
+  {
+   First: { screen: SettingsScreen1 },
+   
+   Second: { screen: images }
+  });
 
 const styles = StyleSheet.create ({
   input: {

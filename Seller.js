@@ -2,19 +2,28 @@
 import React,{Component} from 'react';
 import { Text, View ,Button,TouchableOpacity,TextInput,StyleSheet,Image,Alert,AsyncStorage} from 'react-native';
 import CheckBox from 'react-native-checkbox';
-
+import { StackNavigator } from 'react-navigation';
 import {showImagePicker} from 'react-native-image-picker'
+import images from './Image'
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
     constructor(){
         super();
     }
+    static navigationOptions =
+ {
+    title: 'Seller',
+ };
     state={
         imageSource:null,heading:null,subHeading:null,location:null,users:null,myKey:null,amount:null,checked:false,
         checked1:false,checked2:false,checked3:false,below1:false,average1:false,high1:false
     };
+    FunctionToOpenSecondActivity = () =>
+ {
+    this.props.navigation.navigate('Second');
+    
+ }
     remove(){
-
         let key=['checked','average1','below1','high1','checked1','checked2','checked3','heading','subHeading','location','users','amount','imageSource'];
         AsyncStorage.multiRemove(key,(error)=>{
 
@@ -36,7 +45,7 @@ export default class HomeScreen extends React.Component {
    async check_Box(){
         if(this.state.checked==true){
            await AsyncStorage.setItem('checked',"S")
-          //  this.setState({checked1: false ,checked2: false,checked3: false});
+          this.setState({checked1: false ,checked2: false,checked3: false});
         }
         else if(this.state.checked1==true){
            await AsyncStorage.setItem('checked1',"M")
@@ -169,6 +178,7 @@ export default class HomeScreen extends React.Component {
        GLOBAL.below1=this.state.below1;
        GLOBAL.average1=this.state.average1;
        GLOBAL.high1=this.state.high1;
+      GLOBAL.imageSource=this.state.imageSource
         } catch (error) {
           console.log("Error retrieving data" + error);
         }
@@ -292,18 +302,17 @@ export default class HomeScreen extends React.Component {
     render() {
     return (
     <View style={styles.container}>
-    <Text style={{fontSize:25,color:'#9C27B0',fontFamily: 'Cochin',fontWeight: 'bold',alignItems:'center',justifyContent:'center'}}>                      Seller</Text>
-    <View>
-        <Image onPress={this.sizeImage()}/>
+       <View style={{ flex: 0.1,justifyContent: 'space-between',flexDirection: 'row',marginLeft:10}}>  
+            <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>       
+            <View style={styles.ImageContainer}>            
+                {this.state.imageSource===null ? <Text style={{fontSize:20}}>Select                       </Text>:<Image onPress={this.saveKey5(this.state.imageSource)} source={this.state.imageSource} />}          
             </View>
-        <View style={{ flex: 0.1,justifyContent: 'space-between',flexDirection: 'row',marginLeft:10}}>  
-            <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-            <View style={styles.ImageContainer}>
-                {this.state.imageSource===null ? <Text style={{fontSize:20}}>Select                       </Text>:<Image onPress={this.saveKey5(this.state.imageSource)} source={this.state.imageSource} />}
-            </View>
-
             </TouchableOpacity>
         </View>
+        <View style={{ flex: 0.2,flexDirection: 'row'}}>
+            
+              <Button onPress={this.FunctionToOpenSecondActivity} title="click here to see image"/>
+              </View>
         <View style={{ flex: 0,flexDirection: 'row'}}>
             <Text style={{fontSize:20}}>ImageSize      </Text> 
             <TouchableOpacity onPress={this.check_Box()} style={{ flex: 0.1,flexDirection: 'row'}}>
@@ -400,6 +409,12 @@ export default class HomeScreen extends React.Component {
     );
   }
 }
+export default Project1 = StackNavigator(
+  {
+   First: { screen: HomeScreen },
+   
+   Second: { screen: images }
+  });
 const styles = StyleSheet.create({
     container: {
        paddingTop: 23,

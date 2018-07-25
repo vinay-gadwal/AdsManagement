@@ -6,4 +6,5 @@ import {name as appName} from './app.json';
 import Main from './Main'
 import List from './search'
 import HomeScreen from './Seller'
+import images from './Image'
 AppRegistry.registerComponent(appName, () => Main);
