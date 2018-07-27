@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
  
 import { AppRegistry, StyleSheet, Alert,Text, View, Button,TextInput,TouchableOpacity ,ListView,AsyncStorage} from 'react-native';
- 
+import images from './Image'
 import { StackNavigator } from 'react-navigation';
 import SettingsScreen from './Bidder'
  
-class MainActivity extends Component {
+export default class MainActivity extends Component {
     constructor(){
         super();
         this.state={
@@ -16,15 +16,16 @@ class MainActivity extends Component {
 static navigationOptions =
  {
     title: 'Bidder',
+    
  };
  TextCheck(){
      if(this.state.text.toLowerCase()==GLOBAL.locationS || this.state.text.toUpperCase()==GLOBAL.locationS){
-     return <Text style={{flex:0.3,color:'#9C27B0',fontSize:25,fontFamily: 'Cochin',fontWeight: 'bold'}}>{GLOBAL.locationS}</Text>
+     return <Text style={{flex:0.3,color:'black',fontSize:25,fontFamily: 'Cochin',fontWeight: 'bold'}}>{GLOBAL.locationS}</Text>
  }}
  FunctionToOpenSecondActivity = () =>
  {
 
-    this.props.navigation.navigate('Second');
+    this.props.navigation.navigate('Sixth');
     
  }
  getValueLocally=()=>{
@@ -38,12 +39,11 @@ static navigationOptions =
        <View style = { styles.MainContainer }>
  
          <View style={{marginBottom: 20}}>
-          <Text style={{flex:0.3,color:'#9C27B0',fontSize:25,fontFamily: 'Cochin',fontWeight: 'bold'}}>Bidder</Text>
-        <TextInput style = {styles.input}
+            <TextInput style = {styles.input}
         placeholder="Search by location OR Users"
         onChangeText={(text) => this.setState({text})}/>
         <Button 
-            color={ 'blue' } 
+            color={ '#800080' } 
           // onPress={this.onSubmit.bind(this)}
            onPress={this.getValueLocally}
             title={ 'Search' }  
@@ -58,12 +58,26 @@ static navigationOptions =
     );
  }
 }
-export default Project = StackNavigator(
-{
- First: { screen: MainActivity },
+// export default Project = StackNavigator(
+// {
+//  First: { screen: MainActivity },
  
- Second: { screen: SettingsScreen }
-});
+//  Second: { screen: SettingsScreen },
+//  Third:{screen:images}
+// },
+// {
+//     initialRouteName: 'First',
+//     /* The header config from HomeScreen is now here */
+//     navigationOptions: {
+//       headerStyle: {
+//         backgroundColor: '#800080',
+//       },
+//       headerTintColor: '#fff',
+//       headerTitleStyle: {
+//         fontWeight: 'bold',
+//       },
+//     },
+//   });
  
 const styles = StyleSheet.create(
 {
@@ -71,7 +85,9 @@ const styles = StyleSheet.create(
  {
     justifyContent: 'center',
     flex:1,
-    margin: 10
+   // margin: 10,
+    backgroundColor:"#F0F8FF",
+    alignItems:"center"
   
  },
  input: {
@@ -84,11 +100,11 @@ const styles = StyleSheet.create(
      
     borderWidth: 1,
     // Set border Hex Color Code Here.
-     borderColor: '#D50000',
+     borderColor: '#BA55D3',
      
      // Set border Radius.
      borderRadius: 6 ,
-     marginLeft:75
+     //marginLeft:75
 },
 input1: {
     textAlign: 'center',
@@ -104,7 +120,7 @@ input1: {
      color:'#808000',fontSize:25,fontFamily: 'Cochin',fontWeight: 'bold',
      // Set border Radius.
      borderRadius: 6 ,
-     marginLeft:75
+     //marginLeft:75
 },
  
  TextStyle:

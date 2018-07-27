@@ -9,40 +9,27 @@ import Project1 from './Seller'
 //       style = {{ width: 200, height: 200 }}
 //    />
 // )
-export default class images extends Component{
+export default class images extends Component
+{
 sizeImage(){ 
-    if(GLOBAL.checked=="S" || "s"){
-      if(GLOBAL.checked=="M" || "m"){
-        if(GLOBAL.checked=="L" || "l"){
-          if(GLOBAL.checked!="XL" || "xl" || "Xl" || "xL"){
-              return       <Image style = {{marginTop:40, width: 200, height: 100 }} source={{uri:GLOBAL.imageSource}}></Image>    
-
+    if(GLOBAL.value=="S" || "s"){
+      return <Image style={{width: 50, height: 50}} source={{uri:GLOBAL.imageSource}}></Image>
+    }else if(GLOBAL.value=="M" || "m"){
+      return <Image style={{width: 100, height: 100}} source={{uri:GLOBAL.imageSource}}></Image>
+    }else if(GLOBAL.value=="L" || "l"){
+      return <Image  style={{width: 250, height: 250}} source={{uri:GLOBAL.imageSource}}></Image>
+    }else if(GLOBAL.value=="XL" || "xl" || "Xl" || "xL"){
+              return <Image style={{width: 500, height: 500}} source={{uri:GLOBAL.imageSource}}></Image>    
           }else{
-            return      <Text>Select Image Size</Text>
-
+            return <Text>No Selected Image</Text>
           }
-        }else{
-          return       <Image  style = {{marginTop:40, width: 300, height: 200 }} source={{uri:GLOBAL.imageSource}}></Image>
-
         }
-      }else{
-        return       <Image style = {{marginTop:40, width: 400, height: 300 }} source={{uri:GLOBAL.imageSource}}></Image>
-
-      }ß
-    }
-    else{
-      return       <Image style = {{marginTop:40, width: 500, height: 400 }} source={{uri:GLOBAL.imageSource}}></Image>
-
-    }
-  }
   
-render(){
-   
+render(){   
     return (
         <View style={{ flexDirection: 'row'}}>
         {(GLOBAL.imageSource!=null)?<Text placeholder = "Select users age">{this.sizeImage()}</Text>:<Text>First Choose image </Text>}
         </View>
     )
 }
-
 }

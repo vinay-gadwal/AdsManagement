@@ -7,4 +7,8 @@ import Main from './Main'
 import List from './search'
 import HomeScreen from './Seller'
 import images from './Image'
-AppRegistry.registerComponent(appName, () => Main);
+import MainProject from './Login'
+AppRegistry.registerComponent(appName, () => MainProject);
+
+
+

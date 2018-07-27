@@ -10,6 +10,7 @@
     "@pusher/chatkit": "^0.7.16",
     "apsl-react-native-button": "^3.1.1",
     "pod": "^0.9.0",
+    "radio-button-react-native": "^1.1.6",
     "react": "16.4.1",
     "react-native": "^0.56.0",
     "react-native-checkbox": "^2.0.0",

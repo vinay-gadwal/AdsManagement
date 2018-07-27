@@ -20,27 +20,78 @@ class App extends Component {
 export default createBottomTabNavigator({
   Seller: HomeScreen,
   Bidder: Project,
-  chat:MyChat
+  Chat:MyChat,
 },
+  
   {
-    textStyle: { 
-        fontSize: 40,
-    },
-    tabBarOptions: {
+
+    tabBarOptions:{
+      pressColor: "black",
+          indicatorStyle: {
+            opacity: 0
+          },
+          allowFontScaling: true,
+        
+          upperCaseLabel: false,
+          showLabel: true,
+          activeTintColor: "#fff",
+          labelStyle: {
+            fontSize: 20,
+            textAlign: "center"
+          },
+          showIcon: true,
         style: {
-            backgroundColor: 'white',
-            padding: 8,
-            tabBarTextFontSize: 50           
+            backgroundColor: '#800080',
+            padding: 0,
+            tabBarButtonColor: "#fff",
+            navBarTextFontSize: 100,
+            forceTitlesDisplay: true,
+            tabFontFamily: "Avenir-Medium",
+    textAlign: 'center',
+    //margin: 1
         },
          indicatorStyle: {
-            borderBottomColor: '#ffffff',
-            borderBottomWidth: 3,
-            tabBarTextFontSize: 50        },
+           // borderBottomColor: '#FFA500',
+//borderBottomWidth: 2,
+            tabBarTextFontSize: 500       },
         tabStyle: {
-            borderRightColor: '#ffffff',
-            borderRightWidth: 1,
-            tabBarTextFontSize: 50        }
-    }
+            borderRightColor: '#fff',
+          // borderRightWidth: .5,
+           // borderTopWidth: 1,
+           // backgroundColor: "#800080",
+            tabBarButtonColor: "#fff",
+            navBarTextFontSize: 34,
+           // forceTitlesDisplay: true,
+            tabFontFamily: "Avenir-Medium"
+                  },
+            
+        }
+
+        // tabBarOptions: {
+        //   pressColor: "blue",
+        //   indicatorStyle: {
+        //     opacity: 1
+        //   },
+        //   allowFontScaling: true,
+        
+        //   upperCaseLabel: false,
+        //   showLabel: true,
+        //   activeTintColor: "blue",
+        //   labelStyle: {
+        //     fontSize: 20,
+        //     textAlign: "center"
+        //   },
+        //   showIcon: true,
+        //   style: {
+        //     borderTopWidth: 1,
+        //     backgroundColor: "#87CEFA",
+        //     tabBarButtonColor: "#000",
+        //     navBarTextFontSize: 34,
+        //     forceTitlesDisplay: true,
+        //     tabFontFamily: "Avenir-Medium"
+            
+        //   }
+        
    
         
 });

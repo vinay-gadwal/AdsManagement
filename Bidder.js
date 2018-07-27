@@ -3,7 +3,7 @@ import { TouchableOpacity, AsyncStorage,StyleSheet, View,Image, Text ,TextInput,
 import HomeScreen from './Seller'
 import { StackNavigator } from 'react-navigation';
 import images from './Image'
- class SettingsScreen1 extends Component{
+export default class SettingsScreen1 extends Component{
   constructor(){
     super();
     this.state={
@@ -11,9 +11,10 @@ import images from './Image'
       checked1:"",checked2:"",checked3:"",below1:"",average1:"",high1:"",getValue:''
     }
   }
+  
   FunctionToOpenSecondActivity = () =>
  {
-    this.props.navigation.navigate('Second');
+    this.props.navigation.navigate('Seven');
     
  }
   
@@ -58,22 +59,22 @@ import images from './Image'
   }
 
   sizeImage(){
-    if(GLOBAL.checked==null){
-      if(GLOBAL.checked1==null){
-        if(GLOBAL.checked2==null){
-          if(GLOBAL.checked3!=null){
-            return <Text>{GLOBAL.checked3}</Text>
+    if(GLOBAL.value=="S"){
+      if(GLOBAL.value=="M"){
+        if(GLOBAL.value=="L"){
+          if(GLOBAL.value!="XL"){
+            return <Text>{GLOBAL.value}</Text>
           }else{
             return <Text>No Size selected</Text>
           }
         }else{
-          return <Text>{GLOBAL.checked2}</Text>
+          return <Text>{GLOBAL.value}</Text>
         }
       }else{
-        return <Text>{GLOBAL.checked1}</Text>
+        return <Text>{GLOBAL.value}</Text>
       }
     }else{
-      return <Text>{GLOBAL.checked}</Text>
+      return <Text>{GLOBAL.value}</Text>
     }
     
   }
@@ -100,8 +101,7 @@ import images from './Image'
   render(){
    return (
      <View style = {styles.container}>
-          <Text style={{color:'#9C27B0',fontSize:25,fontFamily: 'Cochin',fontWeight: 'bold',marginTop:10}}>Bidder</Text>
-
+        
     <View>
     
   </View >
@@ -115,34 +115,34 @@ import images from './Image'
             </TouchableOpacity>
       </View>
       <View style={{alignItems:'flex-start', justifyContent:'flex-start',flexDirection: 'row'}}>
-      <Text style={{fontSize:20}}>Size                    </Text>
+      <Text style={{fontSize:20,color: '#BA55D3'}}>Size                    </Text>
       <TextInput style = {styles.input}>{this.sizeImage()}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
-      <Text style={{alignItems: 'flex-end',fontSize:20}}>Heading           </Text>
+      <Text style={{alignItems: 'flex-end',fontSize:20,color: '#BA55D3'}}>Heading           </Text>
       <TextInput style = {styles.input}>{GLOBAL.heading}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
-      <Text style={{fontSize:20}}>SubHeading    </Text>
+      <Text style={{fontSize:20,color: '#BA55D3'}}>SubHeading    </Text>
       <TextInput style = {styles.input}>{GLOBAL.subHeading}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
-      <Text style={{fontSize:20}}>Amount             </Text>
+      <Text style={{fontSize:20,color: '#BA55D3'}}>Amount             </Text>
       <TextInput style = {styles.input}>{GLOBAL.amount}</TextInput>
       </View>
       <View style={{flexDirection: 'row'}}>
-      <Text style={{fontSize:20}}>Location           </Text>
+      <Text style={{fontSize:20,color: '#BA55D3'}}>Location           </Text>
       <TextInput style = {styles.input}>{GLOBAL.locationS}</TextInput>
       </View>
       <View style={{ flexDirection: 'row'}}>
-      <Text style={{fontSize:20}}>Age                    </Text>
+      <Text style={{fontSize:20,color: '#BA55D3'}}>Age                    </Text>
       <TextInput style = {styles.input}>{this.user_Age()}</TextInput>
       </View>
       <View style={{flexDirection: 'row'}}>
-      <Text style={{fontSize:20}}>Volume             </Text>
+      <Text style={{fontSize:20,color: '#BA55D3'}}>Volume             </Text>
       <TextInput style = {styles.input}>{GLOBAL.users}</TextInput>
       </View>
-      <View style={{fontSize:20}}>
+      <View style={{fontSize:20,color: '#BA55D3'}}>
             
               <Button onPress={this.FunctionToOpenSecondActivity} title="click here to see image"/>
               </View>
@@ -150,12 +150,25 @@ import images from './Image'
    )
 }
 }
-export default SettingsScreen = StackNavigator(
-  {
-   First: { screen: SettingsScreen1 },
+// export default SettingsScreen = StackNavigator(
+//   {
+//    First: { screen: SettingsScreen1 },
    
-   Second: { screen: images }
-  });
+//    Second: { screen: images }
+//   },
+//   {
+//     initialRouteName: 'First',
+//     /* The header config from HomeScreen is now here */
+//     navigationOptions: {
+//       headerStyle: {
+//         backgroundColor: '#6A5ACD',
+//       },
+//       headerTintColor: '#fff',
+//       headerTitleStyle: {
+//         fontWeight: 'bold',
+//       },
+//     },
+//   });
 
 const styles = StyleSheet.create ({
   input: {
@@ -168,7 +181,7 @@ const styles = StyleSheet.create ({
      
     borderWidth: 1,
     // Set border Hex Color Code Here.
-     borderColor: '#851D07',
+     borderColor: '#BA55D3',
      
      // Set border Radius.
      borderRadius: 6 ,

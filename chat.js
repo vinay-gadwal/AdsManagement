@@ -1,5 +1,6 @@
 import React from "react";
     import { GiftedChat } from "react-native-gifted-chat";
+    import { AppRegistry, StyleSheet, Alert,Text, View, Button,TextInput,TouchableOpacity ,ListView,AsyncStorage} from 'react-native';
 
     export default class MyChat extends React.Component {
       state = {
@@ -24,6 +25,21 @@ import React from "react";
       }
 
       render() {
-        return <GiftedChat messages={this.state.messages} />;
+        return(
+        <View style={styles.MainContainer}>
+         <GiftedChat messages={this.state.messages} />
+        </View>
+        )
       }
     }
+    const styles = StyleSheet.create(
+      {
+       MainContainer:
+       {
+          justifyContent: 'center',
+          flex:1,
+         // margin: 10,
+          backgroundColor:"#F0F8FF"
+        
+       },
+      })
