@@ -317,11 +317,11 @@ export default class HomeScreen extends React.Component {
                      <Text style = {{textAlign: 'center',marginBottom: 7,height: 40,width:175,borderWidth: 1,borderColor: '#BA55D3',borderRadius: 6 ,}} 
                     autoCapitalize = "none">{this.user_Age()}</Text>
               </View>
-              <View>
-                  <Text style={{fontSize:20,color:"#BA55D3"}}>  Volume                   </Text>
+              <View style={{ flex: 0.2,flexDirection: 'row'}}>
+                  <Text style={{fontSize:20,color:"#BA55D3"}} >  Users                      </Text>
                      <TextInput style = {styles.input} onChangeText={(users) => this.saveKey4(users)}
                     underlineColorAndroid = "transparent"
-                    placeholder = "Number Of Users"
+                    placeholder = "No of Users"
                       width="50%"
                     autoCapitalize = "none"/>
               </View>

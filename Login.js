@@ -10,17 +10,21 @@ import MainActivity from './search'
 // Creating Login Activity.
 class LoginActivity extends Component {
  
-  // Setting up Login Activity title.
+  // Setting up Login Activity title
   
-  
+  static navigationOptions =
+ {
+    title: 'AdManager',
+    
+ };
 constructor(props) {
  
     super(props)
  
     this.state = {
  
-      UserEmail: '',
-      UserPassword: '',
+      UserEmail: 'Vinaygadwal',
+      UserPassword: '123456',
       email:"",
       pwd:""
  
@@ -155,7 +159,7 @@ const styles = StyleSheet.create({
 MainContainer :{
  
 justifyContent: 'center',
-flex:.7,
+flex:1,
 //margin: 0,
 },
  

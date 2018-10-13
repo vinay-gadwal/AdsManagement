@@ -13,11 +13,11 @@ export default class images extends Component
 {
 sizeImage(){ 
     if(GLOBAL.value=="S" || "s"){
-      return <Image style={{width: 50, height: 50}} source={{uri:GLOBAL.imageSource}}></Image>
+      return <Image style={{width: 100, height: 200}} source={{uri:GLOBAL.imageSource}}></Image>
     }else if(GLOBAL.value=="M" || "m"){
-      return <Image style={{width: 100, height: 100}} source={{uri:GLOBAL.imageSource}}></Image>
+      return <Image style={{width: 200, height: 200}} source={{uri:GLOBAL.imageSource}}></Image>
     }else if(GLOBAL.value=="L" || "l"){
-      return <Image  style={{width: 250, height: 250}} source={{uri:GLOBAL.imageSource}}></Image>
+      return <Image  style={{width: 250, height: 350}} source={{uri:GLOBAL.imageSource}}></Image>
     }else if(GLOBAL.value=="XL" || "xl" || "Xl" || "xL"){
               return <Image style={{width: 500, height: 500}} source={{uri:GLOBAL.imageSource}}></Image>    
           }else{
